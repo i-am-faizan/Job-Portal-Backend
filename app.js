@@ -12,9 +12,9 @@ import { newsLetterCron } from './automation/newsLetterCron.js';
 import {errorMiddleware} from './middleware/error.js'
 
 const app = express();
-
+config({path:"./config/config.env"});
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND_URL,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }))
@@ -33,7 +33,6 @@ app.use("/api/v1/user",userRouter);
 app.use("/api/v1/job",jobRouter);
 app.use("/api/v1/application",applicationRouter);
 
-config({path:"./config/config.env"});
 
 newsLetterCron()
 
